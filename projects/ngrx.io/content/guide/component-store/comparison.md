@@ -40,9 +40,9 @@ performant, but they are also introducing code complexity with **indirections**.
 
 Both of them bring [push-based architecture](https://medium.com/@thomasburlesonIA/push-based-architectures-with-rxjs-81b327d7c32d), which is the first indirection. User can no longer 
 get the result of a service method call, instead they would be listening for Observable values
-exposed by that service. The benefit, on the other side, is that User not longer has to worry what
+exposed by that service. The benefit, on the other side, is that User no longer has to worry what
 is changing the state - all the component needs to know is that something has changed it. If the
-component wants to change the state itself, it send the message about it (either dispatches an 
+component wants to change the state itself, it sends the message about it (either dispatches an 
 Action in Store, or calls ComponentStore's updater or effect).
 
 Actions are the second indirection. They are present in Global Store only. There are many benefits 
@@ -86,16 +86,15 @@ ComponentStore is focused on smaller part of state, and thus should contain not 
 itself, but also every "prescription" of how it could be changed. All "`updater`s" and "`effect`s"
 should be part of the ComponentStore, responsible for the specific state.
 
-It make ComponentStore less scalable - if there are too many updaters and effects in a single class,
+It makes ComponentStore less scalable - if there are too many updaters and effects in a single class,
 then it quickly becomes unreadable.
 
 Shared `select`ors should also be part of the ComponentStore, however downstream components might
-have their component-specific details, such as aggregating all the info needed for its _"View Model"_.
+have their component-specific details, such as aggregating all the info needed for their _"View Model"_.
 In such cases, it's acceptable to create `ComponentStore<string>` that won't be managing state
 and would contain a number of selectors.
 
 <figure>
   <img src="generated/images/guide/component-store/file-structure.png" alt="Comparison of NgRx Store and Component Store file structures" width="100%" height="100%" />
 </figure>
-
 
